@@ -4,6 +4,10 @@ import java.util.List;
 import java.util.Map;
 
 import javax.ejb.Local;
+import javax.ws.rs.Consumes;
+import javax.ws.rs.Produces;
+import javax.ws.rs.GET;
+import javax.ws.rs.Path;
 
 import domain.Bus;
 import domain.Line;
@@ -11,9 +15,15 @@ import domain.Station;
 import domain.Stop;
 
 @Local
+@Path("/stationservice")
 public interface StationServicesLocal {
-	Bus findBusById(Integer id);
 
+	
+	Bus findBusById(Integer id);
+	
+	@GET
+	@Consumes("")
+	@Produces("application/json")
 	Station findStationById(Integer id);
 
 	Boolean createLine(Line line, Map<Integer, Station> stations);
@@ -36,6 +46,8 @@ public interface StationServicesLocal {
 
 	Line findLineByName(String name);
 
+	@GET
+	@Produces("application/json")
 	List<Bus> findComingSoonBuses(Station station);
 
 	Stop findLastStopByBusId(Integer idBus);
